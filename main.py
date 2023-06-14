@@ -3,6 +3,7 @@ import os
 import win32com.client
 import webbrowser
 import openai
+from config import apikey
 import datetime
 
 # for speech
@@ -27,6 +28,53 @@ def takeCommand():
             return query
         except Exception as e:
             return "Some error Occurred. Sorry from Jarvis"
+        
+
+def ai(prompt):
+    openai.api_key = apikey
+    text = f"OpenAI response for Prompt: {prompt} \n *************************\n\n"
+
+    response = openai.Completion.create(
+            model="text-davinci-003",
+            prompt=prompt,
+            temperature=1,
+            max_tokens=256,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0
+        )
+    
+    # print(response["choise"][0]["text"])
+    text += response["choices"][0]["text"]
+    if not os.path.exists("D:/Python_for_beg/AI_Desktop_Assistant/Openai"):
+        os.mkdir("D:/Python_for_beg/AI_Desktop_Assistant/Openai")
+    
+    with open(f"Openai/{ ''.join(prompt.split('artificial')[1:]).strip() }.txt", "w") as f:
+        f.write(text)
+
+
+chatStr = " "
+
+def chat(query):
+    global chatStr
+    openai.api_key = apikey
+
+    chatStr += f"User: {query}\n Jarvis: "
+    print(chatStr)
+
+    response = openai.Completion.create(
+            model="text-davinci-003",
+            prompt=chatStr,
+            temperature=1,
+            max_tokens=256,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0
+        )
+    say(response["choices"][0]["text"])
+    chatStr += f"{response['choices'][0]['text']} \n"
+    return response["choices"][0]['text']
+
 
 
 if __name__ == '__main__' :
@@ -51,13 +99,26 @@ if __name__ == '__main__' :
             os.startfile(musicPath)
 
         # for show time
-        if "the time" in query:
+        elif "the time" in query:
             strfTime = datetime.datetime.now().strftime("%H:%M:%S")
             say(f"Sir time is {strfTime}")
 
-        if "open TeamViewer".lower() in query.lower():
+        elif "open TeamViewer".lower() in query.lower():
             say("Ok I can open")
             os.system("C:/Users/Desai/Downloads/TeamViewer.lnk")
 
-        say(query)
+        elif "Using artificial".lower() in query.lower():
+            ai(prompt=query)
+        
+        elif "Jarvis Quit".lower() in query.lower():
+            exit()
+
+        elif "Jarvis Reset".lower() in query.lower():
+            chatStr = " "
+
+        else:
+            print("Chatting ......")
+            chat(query)
+
+        # say(query)
 

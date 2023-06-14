@@ -1,0 +1,22 @@
+OpenAI response for Prompt: using artificial write a mail for joining letter 
+ *************************
+
+
+
+Subject: Joining Letter
+
+Dear [Name],
+
+I am delighted to inform you that you have been selected to join our company as [Job Position]. We are very excited to have you as part of the team.
+
+In your role as [Job Position], you will be responsible for [Insert job duties here]. You will report to [Insert Name] and begin your journey with us on [Insert Date].
+
+At [Company Name], we believe in providing a safe and nurturing work environment that promotes a culture of excellence, integrity, and collaboration. We look forward to the value and enthusiasm that you will bring to the team.
+
+Please find your offer letter enclosed, containing the terms and conditions of your employment. If you have any queries, do not hesitate to contact us.
+
+Thank you for joining us.
+
+Sincerely,
+[Name]
+HR Manager
