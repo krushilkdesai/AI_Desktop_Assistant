@@ -63,5 +63,3 @@ This project combines **Speech Recognition**, **Text-to-Speech (TTS)**, and **Na
 | "Who are you?" | Responds as your AI assistant |
 
 ---
-
-## 🧱 Project Structure
